@@ -5,55 +5,92 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.io.Serializable;
 
 /**
- * 菜品
+ * 菜品对象
  * Created by freeway on 16/9/6.
  */
 public class Dish implements Serializable {
 
-    private String tp_dish_id;
-    private int dish_count;
-    private int dish_price;
-    private String dish_name;
+    @JSONField(name = "tp_dish_id")
+    private String tpDishId;
+    @JSONField(name = "dish_count")
+    private int count;
+    @JSONField(name = "dish_price")
+    private int price;
+    @JSONField(name = "dish_name")
+    private String name;
 
-    public String getTp_dish_id() {
-        return tp_dish_id;
+    /**
+     * 第三方菜品id
+     * @return
+     */
+    public String getTpDishId() {
+        return tpDishId;
     }
 
-    public void setTp_dish_id(String tp_dish_id) {
-        this.tp_dish_id = tp_dish_id;
+    /**
+     * 设置第三方菜品id
+     * @param tpDishId
+     */
+    public void setTpDishId(String tpDishId) {
+        this.tpDishId = tpDishId;
     }
 
-    public int getDish_count() {
-        return dish_count;
+    /**
+     * 数量
+     * @return
+     */
+    public int getCount() {
+        return count;
     }
 
-    public void setDish_count(int dish_count) {
-        this.dish_count = dish_count;
+    /**
+     * 数量
+     * @param count
+     */
+    public void setCount(int count) {
+        this.count = count;
     }
 
-    public int getDish_price() {
-        return dish_price;
+    /**
+     * 价格
+     * @return
+     */
+    public int getPrice() {
+        return price;
     }
 
-    public void setDish_price(int dish_price) {
-        this.dish_price = dish_price;
+    /**
+     * 价格
+     * @param price
+     */
+    public void setPrice(int price) {
+        this.price = price;
     }
 
-    public String getDish_name() {
-        return dish_name;
+    /**
+     * 菜品名称
+     * @return
+     */
+    public String getName() {
+        return name;
     }
 
-    public void setDish_name(String dish_name) {
-        this.dish_name = dish_name;
+    /**
+     * 菜品名称
+     * @param name
+     */
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
         return "Dish{" +
-                "tp_dish_id='" + tp_dish_id + '\'' +
-                ", dish_count=" + dish_count +
-                ", dish_price=" + dish_price +
-                ", dish_name='" + dish_name + '\'' +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", count=" + count +
+                ", tpDishId='" + tpDishId + '\'' +
                 '}';
     }
+
 }

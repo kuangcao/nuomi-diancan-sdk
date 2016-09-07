@@ -39,7 +39,7 @@ public interface OrderStatus {
     /**
      * 商家取消订单
      */
-    int cancel = 50;
+    int CANCELED = 50;
     /**
      * 后付 加菜待确认
      */

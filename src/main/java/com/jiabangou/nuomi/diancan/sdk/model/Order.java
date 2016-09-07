@@ -1,5 +1,7 @@
 package com.jiabangou.nuomi.diancan.sdk.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -9,24 +11,37 @@ import java.util.List;
  */
 public class Order implements Serializable {
 
-    private Long order_id;
+    @JSONField(name = "order_id")
+    private Long orderId;
+    @JSONField(name = "tpMerchantId")
     private Long tp_merchant_id;
+    @JSONField(name = "mobile")
     private String mobile;
-    private Integer total_money;
-    private Integer coupon_code;
-    private String menu_num;
+    @JSONField(name = "total_money")
+    private Integer totalMoney;
+    @JSONField(name = "coupon_code")
+    private Integer couponCode;
+    @JSONField(name = "menu_num")
+    private String mobile_suffix;
+    @JSONField(name = "status")
     private Integer status;
-    private Long order_time;
-    private String table_info;
-    private String table_id;
+    @JSONField(name = "order_time")
+    private Long orderTime;
+    @JSONField(name = "table_info")
+    private String tableName;
+    @JSONField(name = "table_id")
+    private String tableId;
+    @JSONField(name = "pay_detail")
+    private PayDetail payDetail;
+    @JSONField(name = "dishes")
     private List<Dish> dishes;
 
-    public Long getOrder_id() {
-        return order_id;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(Long order_id) {
-        this.order_id = order_id;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public Long getTp_merchant_id() {
@@ -45,28 +60,28 @@ public class Order implements Serializable {
         this.mobile = mobile;
     }
 
-    public Integer getTotal_money() {
-        return total_money;
+    public Integer getTotalMoney() {
+        return totalMoney;
     }
 
-    public void setTotal_money(Integer total_money) {
-        this.total_money = total_money;
+    public void setTotalMoney(Integer totalMoney) {
+        this.totalMoney = totalMoney;
     }
 
-    public Integer getCoupon_code() {
-        return coupon_code;
+    public Integer getCouponCode() {
+        return couponCode;
     }
 
-    public void setCoupon_code(Integer coupon_code) {
-        this.coupon_code = coupon_code;
+    public void setCouponCode(Integer couponCode) {
+        this.couponCode = couponCode;
     }
 
-    public String getMenu_num() {
-        return menu_num;
+    public String getMobile_suffix() {
+        return mobile_suffix;
     }
 
-    public void setMenu_num(String menu_num) {
-        this.menu_num = menu_num;
+    public void setMobile_suffix(String mobile_suffix) {
+        this.mobile_suffix = mobile_suffix;
     }
 
     public Integer getStatus() {
@@ -77,28 +92,28 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public Long getOrder_time() {
-        return order_time;
+    public Long getOrderTime() {
+        return orderTime;
     }
 
-    public void setOrder_time(Long order_time) {
-        this.order_time = order_time;
+    public void setOrderTime(Long orderTime) {
+        this.orderTime = orderTime;
     }
 
-    public String getTable_info() {
-        return table_info;
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setTable_info(String table_info) {
-        this.table_info = table_info;
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
-    public String getTable_id() {
-        return table_id;
+    public String getTableId() {
+        return tableId;
     }
 
-    public void setTable_id(String table_id) {
-        this.table_id = table_id;
+    public void setTableId(String tableId) {
+        this.tableId = tableId;
     }
 
     public List<Dish> getDishes() {
@@ -109,19 +124,28 @@ public class Order implements Serializable {
         this.dishes = dishes;
     }
 
+    public PayDetail getPayDetail() {
+        return payDetail;
+    }
+
+    public void setPayDetail(PayDetail payDetail) {
+        this.payDetail = payDetail;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
-                "order_id=" + order_id +
+                "orderId=" + orderId +
                 ", tp_merchant_id=" + tp_merchant_id +
                 ", mobile='" + mobile + '\'' +
-                ", total_money=" + total_money +
-                ", coupon_code=" + coupon_code +
-                ", menu_num='" + menu_num + '\'' +
+                ", totalMoney=" + totalMoney +
+                ", couponCode=" + couponCode +
+                ", mobile_suffix='" + mobile_suffix + '\'' +
                 ", status=" + status +
-                ", order_time=" + order_time +
-                ", table_info='" + table_info + '\'' +
-                ", table_id='" + table_id + '\'' +
+                ", orderTime=" + orderTime +
+                ", tableName='" + tableName + '\'' +
+                ", tableId='" + tableId + '\'' +
+                ", payDetail=" + payDetail +
                 ", dishes=" + dishes +
                 '}';
     }
