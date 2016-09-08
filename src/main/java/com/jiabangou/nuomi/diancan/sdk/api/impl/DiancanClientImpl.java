@@ -16,7 +16,7 @@ public class DiancanClientImpl implements DiancanClient {
 
     private DishService dishService;
     private FirstPayOrderService firstPayOrderService;
-    private MerchantService merchantService;
+    private ShopService merchantService;
 
     public DiancanClientImpl(DiancanConfigStorage configStorage) {
         this.configStorage = configStorage;
@@ -62,9 +62,9 @@ public class DiancanClientImpl implements DiancanClient {
     }
 
     @Override
-    public MerchantService getMerchantService() {
+    public ShopService getMerchantService() {
         if (merchantService == null) {
-            merchantService = new MerchantServiceImpl(getClient(), configStorage, logListener);
+            merchantService = new ShopServiceImpl(getClient(), configStorage, logListener);
         }
         return merchantService;
     }

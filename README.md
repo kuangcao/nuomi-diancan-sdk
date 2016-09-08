@@ -7,11 +7,22 @@
 
 由于百度糯米点餐SDK有的概念显得不太符合常规命名。所以，在SDK的实现上将名字有所调整，用来消除歧义。
 
-| 百度糯米文档命名 | 当前SDK命名 |
+| 百度糯米参数命名 | 当前SDK命名 |
 |--------|--------|
 | service | app_key |
 | token(用于生成签名的token) | app_secret |
 | token(生成的inttoken作为token摘要) | sign（其实就是签名） |
+| tp_merchant_id | tp_shop_id |
+| shop_id(/dish/info上传菜品接口) | tp_shop_id |
+| dish_code(/dish/info上传菜品接口) | tp_dish_id |
+
+## 附属帮助
+
+可以访问如下URL信息来验证是否上传菜品成功：
+<http://xxx.xxx.xxx.xxx:xxxx/diancai/getdishes?sequence=123&merchant_id=xxxxx>
+
+
+
 
 ## 百度糯米文档订正
 
@@ -41,7 +52,8 @@ POST： /diancaiui/queryorder
         "coupon_code": 123456,
         "menu_num":1234（手机后4位）
         "status": 40,
-        "pay_detail":"[]", uid unset调
+        "pay_detail":{
+ "order_id":"44444","uid":"11111","tp_order_id":"131222","total_money":"1400","no_discount_money":"0","merchant_discount_money":"0","discount_money":"93","red_packet_money":"0","gift_card_money":"0","pay_money":"1307","vouchers_money":"0","merchant_gift_card_money":"0","storecard_money":"0","status":"200","mobile":"123123123","desc":"pay_success","tp_callback_params":{"sequence":160906000400723},"market_price":"0","current_price":"0","shoping_max_discount":"0","preferential_type":"3","coupon_code":"555555","pay_time":"1473136658","merchant_id":"3504530","sequence":"1473136659"},
         "order_time": 1455690,
         "table_info": , "5号桌", //桌号名称
         "table_id": "123abc", //TP方的桌号id

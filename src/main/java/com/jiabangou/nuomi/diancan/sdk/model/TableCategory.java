@@ -14,7 +14,7 @@ public class TableCategory implements Serializable {
     private Long id;
 
     @JSONField(name = "m_id")
-    private Long merchantId;
+    private Long shopId;
 
     @JSONField(name = "name")
     private Long name;
@@ -42,16 +42,16 @@ public class TableCategory implements Serializable {
      * 商户id
      * @return
      */
-    public Long getMerchantId() {
-        return merchantId;
+    public Long getShopId() {
+        return shopId;
     }
 
     /**
      * 商户id
-     * @param merchantId
+     * @param shopId
      */
-    public void setMerchantId(Long merchantId) {
-        this.merchantId = merchantId;
+    public void setShopId(Long shopId) {
+        this.shopId = shopId;
     }
 
     /**
@@ -94,14 +94,14 @@ public class TableCategory implements Serializable {
         TableCategory that = (TableCategory) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        return merchantId != null ? merchantId.equals(that.merchantId) : that.merchantId == null;
+        return shopId != null ? shopId.equals(that.shopId) : that.shopId == null;
 
     }
 
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (merchantId != null ? merchantId.hashCode() : 0);
+        result = 31 * result + (shopId != null ? shopId.hashCode() : 0);
         return result;
     }
 
@@ -109,7 +109,7 @@ public class TableCategory implements Serializable {
     public String toString() {
         return "TableCategory{" +
                 "id=" + id +
-                ", merchantId=" + merchantId +
+                ", shopId=" + shopId +
                 ", name=" + name +
                 ", status=" + status +
                 '}';
