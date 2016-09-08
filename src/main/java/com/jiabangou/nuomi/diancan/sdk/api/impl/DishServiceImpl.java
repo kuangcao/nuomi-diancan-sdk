@@ -1,7 +1,6 @@
 package com.jiabangou.nuomi.diancan.sdk.api.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.jiabangou.nuomi.diancan.sdk.api.DiancanConfigStorage;
 import com.jiabangou.nuomi.diancan.sdk.api.DishService;
@@ -46,23 +45,21 @@ public class DishServiceImpl implements DishService {
     /**
      * 构造签名和公用参数
      *
-     * @param params 请求参数
+     * @param jsonObject 请求参数
      * @return 在请求参数基础上混入了签名和公用参数
      */
-    protected Map<String, String> buildRealParams(Map<String, String> params) {
-        Map<String, String> realParams = new HashMap<>(params.size() + 2);
-        realParams.put("site_name", configStorage.getDishAppKey());
-        realParams.put("sign", configStorage.getDishAppSecret());
-        realParams.putAll(params);
-        return realParams;
+    protected JSONObject buildRealParams(JSONObject jsonObject) {
+        jsonObject.put("site_name", configStorage.getDishAppKey());
+        jsonObject.put("sign", configStorage.getDishAppSecret());
+        return jsonObject;
     }
 
-    protected JSONObject execute(String url, Map<String, String> params) throws NuomiErrorException {
-        Map<String, String> realParams = buildRealParams(params);
+    protected JSONObject execute(String url, JSONObject jsonParams) throws NuomiErrorException {
+        JSONObject realParams = buildRealParams(jsonParams);
         Request.Builder builder = new Request.Builder();
         String realUrl = configStorage.getDishBaseUrl() + url;
         builder.url(realUrl)
-                .post(createFormBody(realParams));
+                .post(createJsonBody(realParams));
         try {
             client.newCall(builder.build()).execute();
             Response response = client.newCall(builder.build()).execute();
@@ -81,16 +78,15 @@ public class DishServiceImpl implements DishService {
         }
     }
 
-    private RequestBody createFormBody(Map<String, String> params) {
-        FormBody.Builder formBodyBuilder = new FormBody.Builder();
-        for (Map.Entry<String, String> entry : params.entrySet()) {
-            formBodyBuilder.add(entry.getKey(), entry.getValue());
-        }
-        return formBodyBuilder.build();
+    public static final MediaType MEDIA_TYPE_JSON
+            = MediaType.parse("application/json; charset=utf-8");
+
+    private RequestBody createJsonBody(JSONObject jsonObject) {
+        return RequestBody.create(MEDIA_TYPE_JSON, jsonObject.toJSONString());
     }
 
     @Override
-    public void uploadDishs(List<Dish> dishs) throws NuomiErrorException {
+    public void uploadDishes(List<Dish> dishs) throws NuomiErrorException {
         if (dishs == null || dishs.isEmpty()) {
             return;
         }
@@ -99,17 +95,17 @@ public class DishServiceImpl implements DishService {
             partDishs.add(dishs.get(i));
             if (partDishs.size() == 10 || i == dishs.size() - 1) {
                 final List<Dish> updatePartDishs = new ArrayList<>(partDishs);
-                execute(DISH_INFO, new HashMap<String, String>() {{
-                    put("count", String.valueOf(updatePartDishs.size()));
-                    put("data", JSONObject.toJSON(updatePartDishs).toString());
-                }});
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("count", updatePartDishs.size());
+                jsonObject.put("data", JSONObject.toJSON(updatePartDishs));
+                execute(DISH_INFO, jsonObject);
                 partDishs = new ArrayList<>(10);
             }
         }
     }
 
     @Override
-    public void updateDishOnlineStatus(List<DishStatus> dishStatuses) throws NuomiErrorException {
+    public void updateDishOnlineStatuses(List<DishStatus> dishStatuses) throws NuomiErrorException {
         if (dishStatuses == null || dishStatuses.isEmpty()) {
             return;
         }
@@ -118,10 +114,10 @@ public class DishServiceImpl implements DishService {
             partDishStatuses.add(dishStatuses.get(i));
             if (partDishStatuses.size() == 10 || i == dishStatuses.size() - 1) {
                 final List<DishStatus> updatePartDishStatuses = new ArrayList<>(partDishStatuses);
-                execute(DISH_STATUS, new HashMap<String, String>() {{
-                    put("count", String.valueOf(updatePartDishStatuses.size()));
-                    put("data", JSONObject.toJSON(updatePartDishStatuses).toString());
-                }});
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("count", updatePartDishStatuses.size());
+                jsonObject.put("data", JSONObject.toJSON(updatePartDishStatuses));
+                execute(DISH_STATUS, jsonObject);
                 partDishStatuses = new ArrayList<>(10);
             }
         }

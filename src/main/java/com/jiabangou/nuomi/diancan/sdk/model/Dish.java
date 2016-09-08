@@ -3,7 +3,6 @@ package com.jiabangou.nuomi.diancan.sdk.model;
 import com.alibaba.fastjson.annotation.JSONField;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,7 +12,7 @@ import java.util.List;
 public class Dish implements Serializable {
 
     @JSONField(name = "shop_id")
-    private String shopId;
+    private String tpMerchantId;
     @JSONField(name = "dish_code")
     private String id;
     @JSONField(name = "dish_thumb_image")
@@ -29,29 +28,21 @@ public class Dish implements Serializable {
     @JSONField(name="dish_unit")
     private String unit;
     @JSONField(name="dish_increase_unit")
-    private int increase_unit;
+    private int increaseUnit;
     @JSONField(name="dish_sell_unit")
-    private int sell_unit;
+    private int sellUnit;
     @JSONField(name="sort_id")
-    private int sort_id;
+    private int sortId;
     @JSONField(name="dish_desc")
     private String desc;
     @JSONField(name="dish_score")
     private float score;
     @JSONField(name="dish_comment")
-    private List<String> dish_comment;
+    private List<String> dishComment;
     @JSONField(name="online_state")
     private int onlineState;
     @JSONField(name="dish_attr")
     private List<DishAttr> dishAttrs;
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
 
     public String getId() {
         return id;
@@ -109,30 +100,6 @@ public class Dish implements Serializable {
         this.unit = unit;
     }
 
-    public int getIncrease_unit() {
-        return increase_unit;
-    }
-
-    public void setIncrease_unit(int increase_unit) {
-        this.increase_unit = increase_unit;
-    }
-
-    public int getSell_unit() {
-        return sell_unit;
-    }
-
-    public void setSell_unit(int sell_unit) {
-        this.sell_unit = sell_unit;
-    }
-
-    public int getSort_id() {
-        return sort_id;
-    }
-
-    public void setSort_id(int sort_id) {
-        this.sort_id = sort_id;
-    }
-
     public String getDesc() {
         return desc;
     }
@@ -145,22 +112,22 @@ public class Dish implements Serializable {
         return score;
     }
 
+    /**
+     * 评分(可选)
+     * @param score
+     */
     public void setScore(float score) {
         this.score = score;
-    }
-
-    public List<String> getDish_comment() {
-        return dish_comment;
-    }
-
-    public void setDish_comment(List<String> dish_comment) {
-        this.dish_comment = dish_comment;
     }
 
     public int getOnlineState() {
         return onlineState;
     }
 
+    /**
+     * 是否在线（0：沽清，1：在线，2：已下架，3：已删除）
+     * @param onlineState
+     */
     public void setOnlineState(int onlineState) {
         this.onlineState = onlineState;
     }
@@ -171,6 +138,46 @@ public class Dish implements Serializable {
 
     public void setDishAttrs(List<DishAttr> dishAttrs) {
         this.dishAttrs = dishAttrs;
+    }
+
+    public String getTpMerchantId() {
+        return tpMerchantId;
+    }
+
+    public void setTpMerchantId(String tpMerchantId) {
+        this.tpMerchantId = tpMerchantId;
+    }
+
+    public int getIncreaseUnit() {
+        return increaseUnit;
+    }
+
+    public void setIncreaseUnit(int increaseUnit) {
+        this.increaseUnit = increaseUnit;
+    }
+
+    public int getSellUnit() {
+        return sellUnit;
+    }
+
+    public void setSellUnit(int sellUnit) {
+        this.sellUnit = sellUnit;
+    }
+
+    public int getSortId() {
+        return sortId;
+    }
+
+    public void setSortId(int sortId) {
+        this.sortId = sortId;
+    }
+
+    public List<String> getDishComment() {
+        return dishComment;
+    }
+
+    public void setDishComment(List<String> dishComment) {
+        this.dishComment = dishComment;
     }
 
     public static class DishAttr implements Serializable {
@@ -272,7 +279,7 @@ public class Dish implements Serializable {
     @Override
     public String toString() {
         return "Dish{" +
-                "shopId='" + shopId + '\'' +
+                "tpMerchantId='" + tpMerchantId + '\'' +
                 ", id='" + id + '\'' +
                 ", dishThumbImages=" + dishThumbImages +
                 ", dishImages=" + dishImages +
@@ -280,13 +287,14 @@ public class Dish implements Serializable {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", unit='" + unit + '\'' +
-                ", increase_unit=" + increase_unit +
-                ", sell_unit=" + sell_unit +
-                ", sort_id=" + sort_id +
+                ", increaseUnit=" + increaseUnit +
+                ", sellUnit=" + sellUnit +
+                ", sortId=" + sortId +
                 ", desc='" + desc + '\'' +
                 ", score=" + score +
-                ", dish_comment=" + dish_comment +
+                ", dishComment=" + dishComment +
                 ", onlineState=" + onlineState +
+                ", dishAttrs=" + dishAttrs +
                 '}';
     }
 }

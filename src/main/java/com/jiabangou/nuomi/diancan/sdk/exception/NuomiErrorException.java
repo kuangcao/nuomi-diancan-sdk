@@ -11,9 +11,9 @@ public class NuomiErrorException extends Exception {
     protected int code;
     protected String responseString;
     protected String requestUrl;
-    protected Map<String, String> requestParams;
+    protected Map<String, ?> requestParams;
 
-    public NuomiErrorException(int code, String message, String requestUrl, Map<String, String> requestParams, String responseString) {
+    public NuomiErrorException(int code, String message, String requestUrl, Map<String, ?> requestParams, String responseString) {
         super(message);
         this.code = code;
         this.responseString = responseString;
@@ -38,7 +38,7 @@ public class NuomiErrorException extends Exception {
         return requestUrl;
     }
 
-    public Map<String, String> getRequestParams() {
+    public Map<String, ?> getRequestParams() {
         return requestParams;
     }
 

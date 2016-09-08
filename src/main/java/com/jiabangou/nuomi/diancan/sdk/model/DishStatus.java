@@ -11,19 +11,11 @@ import java.io.Serializable;
 public class DishStatus implements Serializable {
 
     @JSONField(name = "shop_id")
-    private String shopId;
+    private String tpMerchantId;
     @JSONField(name = "dish_code")
     private String id;
     @JSONField(name = "online_state")
     private int onlineState;
-
-    public String getShopId() {
-        return shopId;
-    }
-
-    public void setShopId(String shopId) {
-        this.shopId = shopId;
-    }
 
     public String getId() {
         return id;
@@ -41,10 +33,18 @@ public class DishStatus implements Serializable {
         this.onlineState = onlineState;
     }
 
+    public String getTpMerchantId() {
+        return tpMerchantId;
+    }
+
+    public void setTpMerchantId(String tpMerchantId) {
+        this.tpMerchantId = tpMerchantId;
+    }
+
     @Override
     public String toString() {
         return "DishStatus{" +
-                "shopId='" + shopId + '\'' +
+                "tpMerchantId='" + tpMerchantId + '\'' +
                 ", id='" + id + '\'' +
                 ", onlineState=" + onlineState +
                 '}';

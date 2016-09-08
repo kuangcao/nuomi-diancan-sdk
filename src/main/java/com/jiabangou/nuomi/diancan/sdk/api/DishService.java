@@ -18,12 +18,12 @@ public interface DishService {
      * @param dishs
      * @throws NuomiErrorException
      */
-    void uploadDishs(List<Dish> dishs) throws NuomiErrorException;
+    void uploadDishes(List<Dish> dishs) throws NuomiErrorException;
 
     /**
      * 更新菜品状态
      * @param dishStatuses
      * @throws NuomiErrorException
      */
-    void updateDishOnlineStatus(List<DishStatus> dishStatuses) throws NuomiErrorException;
+    void updateDishOnlineStatuses(List<DishStatus> dishStatuses) throws NuomiErrorException;
 }
