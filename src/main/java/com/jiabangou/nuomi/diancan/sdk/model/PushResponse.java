@@ -10,13 +10,17 @@ import java.io.Serializable;
  */
 public class PushResponse implements Serializable {
 
-    private int errno;
+    private int errno = 0;
 
-    private String msg;
+    private String msg = "success";
 
     private String sequence;
 
     private JSONObject data;
+
+    public static PushResponse create() {
+        return new PushResponse();
+    }
 
     public int getErrno() {
         return errno;
