@@ -74,12 +74,20 @@ public class FirstPayOrderServiceImpl extends DiancanBaseServiceImpl implements 
     /**
      * 针对于先付只有确认和取消状态可用
      *
-     * @param orderId
-     * @param tpOrderId
-     * @param status
+     * @param orderId 订单id
+     * @param tpOrderId 第三方订单id
+     * @param status 状态
      * @throws NuomiErrorException
      */
     protected void updateOrderStatus(Long orderId, String tpOrderId, int status) throws NuomiErrorException {
+        if (orderId == null) {
+            throw new NuomiErrorException(-1, "orderId is required.");
+        }
+
+        if (tpOrderId == null) {
+            throw new NuomiErrorException(-1, "tpOrderId is required.");
+        }
+
         execute(DIANCAIUI_UPDATEORDER, new HashMap<String, String>() {{
             put("order_id", String.valueOf(orderId));
             put("tp_order_id", tpOrderId);
@@ -92,6 +100,10 @@ public class FirstPayOrderServiceImpl extends DiancanBaseServiceImpl implements 
 
     @Override
     public List<Order> getUnfinishedOrders(Long tpMerchantId) throws NuomiErrorException {
+        if (tpMerchantId == null) {
+            throw new NuomiErrorException(-1, "tpMerchantId is required.");
+        }
+
         JSONObject jsonObject = execute(DIANCAIUI_POIORDER, new HashMap<String, String>() {{
             put("tp_merchant_id", String.valueOf(tpMerchantId));
         }});

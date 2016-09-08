@@ -95,7 +95,7 @@ public class DiancanBaseServiceImpl {
     protected JSONObject execute(String url, Map<String, String> params) throws NuomiErrorException {
         Map<String, String> realParams = buildRealParams(params);
         Request.Builder builder = new Request.Builder();
-        String realUrl = configStorage.getBashUrl() + url;
+        String realUrl = configStorage.getBaseUrl() + url;
         builder.url(realUrl)
                 .post(createFormBody(realParams));
         try {
