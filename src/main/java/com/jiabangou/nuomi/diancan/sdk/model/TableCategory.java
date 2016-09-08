@@ -17,7 +17,7 @@ public class TableCategory implements Serializable {
     private Long shopId;
 
     @JSONField(name = "name")
-    private Long name;
+    private String name;
 
     @JSONField(name = "status")
     private short status;
@@ -58,7 +58,7 @@ public class TableCategory implements Serializable {
      * 分类名称
      * @return
      */
-    public Long getName() {
+    public String getName() {
         return name;
     }
 
@@ -66,7 +66,7 @@ public class TableCategory implements Serializable {
      * 分类名称
      * @param name
      */
-    public void setName(Long name) {
+    public void setName(String name) {
         this.name = name;
     }
 

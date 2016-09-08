@@ -5,16 +5,18 @@
 
 ## 公共参数说明
 
-由于百度糯米点餐SDK有的概念显得不太符合常规命名。所以，在SDK的实现上将名字有所调整，用来消除歧义。
+由于百度糯米点餐SDK有的概念显得不太符合常规命名，接口也都是由几部分人开发的，命名有些地方也不统一，所以在代码的实现中将其命名做了统一，用来消除歧义。
 
 | 百度糯米参数命名 | 当前SDK命名 |
 |--------|--------|
 | service | app_key |
 | token(用于生成签名的token) | app_secret |
 | token(生成的inttoken作为token摘要) | sign（其实就是签名） |
-| tp_merchant_id | tp_shop_id |
+| site_name(/dish/info上传菜品接口) | dish_app_key |
+| sign(/dish/info上传菜品接口) | dish_app_secret |
 | shop_id(/dish/info上传菜品接口) | tp_shop_id |
 | dish_code(/dish/info上传菜品接口) | tp_dish_id |
+| tp_merchant_id | tp_shop_id |
 
 ## 附属帮助
 

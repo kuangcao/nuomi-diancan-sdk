@@ -42,6 +42,30 @@ public class DishServiceTest extends ServiceTest {
         dish.setDishAttrs(Collections.emptyList());
 
         dishes.add(dish);
+
+        Dish dish2 = new Dish();
+        dish2.setCategoryName("凉菜");
+        dish2.setDesc("松花皮蛋");
+        dish2.setDishImages(new ArrayList<String>() {{
+            add("http://i2.xygcdn.com/login/xyglogo.jpg");
+        }});
+        dish2.setDishThumbImages(new ArrayList<String>() {{
+            add("http://i2.xygcdn.com/login/xyglogo.jpg");
+        }});
+        dish2.setId("2");
+        dish2.setIncreaseUnit(1);
+        dish2.setName("松花皮蛋");
+        dish2.setOnlineState(Dish.ONLINE_STATE_ONLINE);
+        dish2.setSortId(1);
+        dish2.setPrice(120);
+        dish2.setSellUnit(1);
+        dish2.setTpShopId("3");
+        dish2.setUnit("盘");
+        dish2.setScore(5);
+        dish2.setDishComment(Collections.emptyList());
+        dish2.setDishAttrs(Collections.emptyList());
+        dishes.add(dish2);
+
         System.out.println(JSON.toJSON(dishes).toString());
         diancanClient.getDishService().uploadDishes(dishes);
     }

@@ -16,7 +16,7 @@ public interface DiancanClient {
 
     FirstPayOrderService getFirstPayOrderService();
 
-    ShopService getMerchantService();
+    ShopService getShopService();
 
     static DiancanClient create(DiancanConfigStorage configStorage) {
         return new DiancanClientImpl(configStorage);

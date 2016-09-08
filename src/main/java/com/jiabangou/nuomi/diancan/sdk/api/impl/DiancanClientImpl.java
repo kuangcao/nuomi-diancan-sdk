@@ -62,7 +62,7 @@ public class DiancanClientImpl implements DiancanClient {
     }
 
     @Override
-    public ShopService getMerchantService() {
+    public ShopService getShopService() {
         if (merchantService == null) {
             merchantService = new ShopServiceImpl(getClient(), configStorage, logListener);
         }
