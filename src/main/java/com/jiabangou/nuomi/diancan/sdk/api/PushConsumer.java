@@ -1,9 +1,7 @@
 package com.jiabangou.nuomi.diancan.sdk.api;
 
-import com.jiabangou.nuomi.diancan.sdk.exception.NuomiErrorException;
 import com.jiabangou.nuomi.diancan.sdk.model.Order;
 import com.jiabangou.nuomi.diancan.sdk.model.OrderPayStatus;
-import com.jiabangou.nuomi.diancan.sdk.model.OrderResult;
 
 /**
  * 推送处理接口, 需要业务自己实现推送后的处理
@@ -18,17 +16,16 @@ public interface PushConsumer {
     /**
      * 创建订单接口
      * @param order
-     * @return
-     * @throws NuomiErrorException
+     * @return tpOrderId
      */
-    OrderResult addOrder(Order order);
+    String addOrder(Order order);
 
     /**
      * 支付状态回调
      * @param orderPayStatus
-     * @return
+     * @return tpOrderId
      */
-    OrderResult changeOrderPayStatus(OrderPayStatus orderPayStatus);
+    String changeOrderPayStatus(OrderPayStatus orderPayStatus);
 
     /**
      * 获取订单状态

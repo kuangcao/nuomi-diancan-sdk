@@ -2,9 +2,10 @@ package com.jiabangou.nuomi.diancan.sdk.api.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.util.TypeUtils;
 import com.jiabangou.nuomi.diancan.sdk.api.*;
-import com.jiabangou.nuomi.diancan.sdk.model.*;
+import com.jiabangou.nuomi.diancan.sdk.model.Order;
+import com.jiabangou.nuomi.diancan.sdk.model.OrderPayStatus;
+import com.jiabangou.nuomi.diancan.sdk.model.PushResponse;
 import okhttp3.OkHttpClient;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.StringUtils;
@@ -95,19 +96,25 @@ public class DiancanClientImpl implements DiancanClient {
 
             Order order = JSONObject.toJavaObject(jsonObject, Order.class);
 
-            OrderResult orderResult = pushConsumer.addOrder(order);
-            orderResult.setOrderStatus(String.valueOf(order.getStatus()));
+            String tpOderId = pushConsumer.addOrder(order);
+            JSONObject data = new JSONObject();
+            data.put("order_status", order.getStatus());
+            data.put("tp_order_id", tpOderId);
+
             PushResponse pushResponse = PushResponse.create();
-            pushResponse.setData((JSONObject) JSON.toJSON(orderResult));
+            pushResponse.setData(data);
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
         } else if (pushAction == PushConsumer.PUSH_ACTION_CHANGE_ORDER_PAY_STATUS) {
             JSONObject jsonObject = (JSONObject)JSON.toJSON(params);
             OrderPayStatus orderPayStatus = JSONObject.toJavaObject(jsonObject, OrderPayStatus.class);
-            OrderResult orderResult = pushConsumer.changeOrderPayStatus(orderPayStatus);
-            orderResult.setOrderStatus(String.valueOf(orderPayStatus.getStatus()));
+            String tpOderId = pushConsumer.changeOrderPayStatus(orderPayStatus);
+            JSONObject data = new JSONObject();
+            data.put("order_status", orderPayStatus.getStatus());
+            data.put("tp_order_id", tpOderId);
+
             PushResponse pushResponse = PushResponse.create();
-            pushResponse.setData((JSONObject) JSON.toJSON(orderResult));
+            pushResponse.setData(data);
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
 
