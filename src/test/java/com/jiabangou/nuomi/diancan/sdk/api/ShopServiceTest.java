@@ -1,6 +1,8 @@
 package com.jiabangou.nuomi.diancan.sdk.api;
 
 import com.jiabangou.nuomi.diancan.sdk.exception.NuomiErrorException;
+import com.jiabangou.nuomi.diancan.sdk.model.BusinessTime;
+import com.jiabangou.nuomi.diancan.sdk.model.DishCategory;
 import com.jiabangou.nuomi.diancan.sdk.model.Table;
 import com.jiabangou.nuomi.diancan.sdk.model.TableCategory;
 import org.junit.Test;
@@ -40,7 +42,7 @@ public class ShopServiceTest extends ServiceTest {
         category3.setId(3L);
         category3.setName("外摆");
         category3.setShopId(tpShopId);
-        categories.add(category2);
+        categories.add(category3);
 
         List<Table> tables = new ArrayList<>();
         Table table1 = new Table();
@@ -71,6 +73,44 @@ public class ShopServiceTest extends ServiceTest {
         tables.add(table3);
 
         diancanClient.getShopService().syncTablesAndCategories(tpShopId, tables, categories);
+    }
+
+    @Test
+    public void testUpdateBasicInfo() throws NuomiErrorException {
+        List<BusinessTime> businessTimes = new ArrayList<BusinessTime>() {{
+            BusinessTime businessTime = new BusinessTime();
+
+            businessTime.setWeek(new ArrayList<Short>() {{
+                add((short)1);
+                add((short)2);
+                add((short)3);
+                add((short)4);
+                add((short)5);
+            }});
+
+            businessTime.setTime(new ArrayList<BusinessTime.TimeScope>() {{
+                BusinessTime.TimeScope timeScope = new BusinessTime.TimeScope();
+                timeScope.setStartTime("10:00");
+                timeScope.setEndTime("22:00");
+                add(timeScope);
+            }});
+
+            add(businessTime);
+        }};
+
+        List<DishCategory> dishCategories = new ArrayList<DishCategory>() {{
+            DishCategory dishCategory = new DishCategory();
+            dishCategory.setId(1L);
+            dishCategory.setName("凉菜");
+            add(dishCategory);
+
+            DishCategory dishCategory2 = new DishCategory();
+            dishCategory2.setId(2L);
+            dishCategory2.setName("荤菜");
+            add(dishCategory2);
+        }};
+
+        diancanClient.getShopService().updateBasicInfo(tpShopId, 1, 1, businessTimes, dishCategories);
     }
 
 }

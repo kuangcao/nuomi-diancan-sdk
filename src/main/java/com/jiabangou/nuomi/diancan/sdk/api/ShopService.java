@@ -1,6 +1,8 @@
 package com.jiabangou.nuomi.diancan.sdk.api;
 
 import com.jiabangou.nuomi.diancan.sdk.exception.NuomiErrorException;
+import com.jiabangou.nuomi.diancan.sdk.model.BusinessTime;
+import com.jiabangou.nuomi.diancan.sdk.model.DishCategory;
 import com.jiabangou.nuomi.diancan.sdk.model.Table;
 import com.jiabangou.nuomi.diancan.sdk.model.TableCategory;
 
@@ -32,8 +34,15 @@ public interface ShopService {
 
     /**
      * 更新基本信息
+     * @param tpShopId TP方商户id
+     * @param serviceState 商户服务状态0：暂停服务，1：服务中
+     * @param tableType 0:无桌号 1：有桌号，默认为0
+     * @param businessTimes 营业时间 非必须可为null
+     * @param dishCategories 菜品分类 非必须可为null
      * @throws NuomiErrorException
      */
-    void updateBasicInfo() throws NuomiErrorException;
+    void updateBasicInfo(Long tpShopId, int serviceState, int tableType,
+                         List<BusinessTime> businessTimes, List<DishCategory> dishCategories)
+            throws NuomiErrorException;
 
 }

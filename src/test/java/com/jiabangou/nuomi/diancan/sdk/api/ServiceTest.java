@@ -22,7 +22,7 @@ public abstract class ServiceTest {
 
             @Override
             public String getAppSecret() {
-                return "cdd6d544297af47cf41a4ec403db3f24";
+                return "bc6df7d374dbc5c8df5c7106f2fd3ed4";
             }
 
             @Override
@@ -37,7 +37,7 @@ public abstract class ServiceTest {
 
             @Override
             public String getBaseUrl() {
-                return "http://220.181.163.63:8989";
+                return "http://106.120.159.173:8999";
             }
 
             @Override
