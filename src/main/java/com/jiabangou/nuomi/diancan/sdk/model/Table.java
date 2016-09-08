@@ -14,7 +14,7 @@ public class Table implements Serializable {
     private Long id;
 
     @JSONField(name = "m_id")
-    private Long shopId;
+    private Long tpShopId;
 
     @JSONField(name = "class_id")
     private Long categoryId;
@@ -51,16 +51,16 @@ public class Table implements Serializable {
      * 门店ID
      * @return
      */
-    public Long getShopId() {
-        return shopId;
+    public Long getTpShopId() {
+        return tpShopId;
     }
 
     /**
      * 门店ID
-     * @param shopId
+     * @param tpShopId
      */
-    public void setShopId(Long shopId) {
-        this.shopId = shopId;
+    public void setTpShopId(Long tpShopId) {
+        this.tpShopId = tpShopId;
     }
 
     /**
@@ -147,7 +147,7 @@ public class Table implements Serializable {
     public String toString() {
         return "Table{" +
                 "id=" + id +
-                ", shopId=" + shopId +
+                ", tpShopId=" + tpShopId +
                 ", categoryId=" + categoryId +
                 ", name='" + name + '\'' +
                 ", minimumCapacity=" + minimumCapacity +

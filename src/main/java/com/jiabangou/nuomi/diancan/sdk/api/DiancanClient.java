@@ -1,6 +1,9 @@
 package com.jiabangou.nuomi.diancan.sdk.api;
 
 import com.jiabangou.nuomi.diancan.sdk.api.impl.DiancanClientImpl;
+import com.jiabangou.nuomi.diancan.sdk.model.PushResponse;
+
+import java.util.Map;
 
 /**
  * 点餐客户端
@@ -17,6 +20,8 @@ public interface DiancanClient {
     FirstPayOrderService getFirstPayOrderService();
 
     ShopService getShopService();
+
+    PushResponse pushHandle(int pushAction, Map<String, String> params);
 
     static DiancanClient create(DiancanConfigStorage configStorage) {
         return new DiancanClientImpl(configStorage);

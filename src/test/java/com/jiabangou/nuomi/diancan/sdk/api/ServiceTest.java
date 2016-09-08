@@ -22,7 +22,7 @@ public abstract class ServiceTest {
 
             @Override
             public String getAppSecret() {
-                return "bc6df7d374dbc5c8df5c7106f2fd3ed4";
+                return "cdd6d544297af47cf41a4ec403db3f24";
             }
 
             @Override

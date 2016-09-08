@@ -30,18 +30,18 @@ public class ShopServiceTest extends ServiceTest {
         TableCategory category1 = new TableCategory();
         category1.setId(1L);
         category1.setName("大厅");
-        category1.setShopId(tpShopId);
+        category1.setTpShopId(tpShopId);
         categories.add(category1);
         TableCategory category2 = new TableCategory();
         category2.setId(2L);
         category2.setName("包间");
-        category2.setShopId(tpShopId);
+        category2.setTpShopId(tpShopId);
         categories.add(category2);
 
         TableCategory category3 = new TableCategory();
         category3.setId(3L);
         category3.setName("外摆");
-        category3.setShopId(tpShopId);
+        category3.setTpShopId(tpShopId);
         categories.add(category3);
 
         List<Table> tables = new ArrayList<>();
@@ -51,7 +51,7 @@ public class ShopServiceTest extends ServiceTest {
         table1.setMaximumCapacity(4);
         table1.setMinimumCapacity(1);
         table1.setName("1号桌");
-        table1.setShopId(tpShopId);
+        table1.setTpShopId(tpShopId);
         tables.add(table1);
 
         Table table2 = new Table();
@@ -60,7 +60,7 @@ public class ShopServiceTest extends ServiceTest {
         table2.setMaximumCapacity(4);
         table2.setMinimumCapacity(1);
         table2.setName("雅1");
-        table2.setShopId(tpShopId);
+        table2.setTpShopId(tpShopId);
         tables.add(table2);
 
         Table table3 = new Table();
@@ -69,7 +69,7 @@ public class ShopServiceTest extends ServiceTest {
         table3.setMaximumCapacity(4);
         table3.setMinimumCapacity(2);
         table3.setName("外1");
-        table3.setShopId(tpShopId);
+        table3.setTpShopId(tpShopId);
         tables.add(table3);
 
         diancanClient.getShopService().syncTablesAndCategories(tpShopId, tables, categories);
