@@ -13,8 +13,8 @@ public class Order implements Serializable {
 
     @JSONField(name = "order_id")
     private Long orderId;
-    @JSONField(name = "tpMerchantId")
-    private Long tp_merchant_id;
+    @JSONField(name = "tp_merchant_id")
+    private Long tpShopid;
     @JSONField(name = "mobile")
     private String mobile;
     @JSONField(name = "total_money")
@@ -22,7 +22,7 @@ public class Order implements Serializable {
     @JSONField(name = "coupon_code")
     private Integer couponCode;
     @JSONField(name = "menu_num")
-    private String mobile_suffix;
+    private String mobileSuffix;
     @JSONField(name = "status")
     private Integer status;
     @JSONField(name = "order_time")
@@ -44,12 +44,12 @@ public class Order implements Serializable {
         this.orderId = orderId;
     }
 
-    public Long getTp_merchant_id() {
-        return tp_merchant_id;
+    public Long getTpShopid() {
+        return tpShopid;
     }
 
-    public void setTp_merchant_id(Long tp_merchant_id) {
-        this.tp_merchant_id = tp_merchant_id;
+    public void setTpShopid(Long tpShopid) {
+        this.tpShopid = tpShopid;
     }
 
     public String getMobile() {
@@ -76,12 +76,12 @@ public class Order implements Serializable {
         this.couponCode = couponCode;
     }
 
-    public String getMobile_suffix() {
-        return mobile_suffix;
+    public String getMobileSuffix() {
+        return mobileSuffix;
     }
 
-    public void setMobile_suffix(String mobile_suffix) {
-        this.mobile_suffix = mobile_suffix;
+    public void setMobileSuffix(String mobileSuffix) {
+        this.mobileSuffix = mobileSuffix;
     }
 
     public Integer getStatus() {
@@ -136,11 +136,11 @@ public class Order implements Serializable {
     public String toString() {
         return "Order{" +
                 "orderId=" + orderId +
-                ", tp_merchant_id=" + tp_merchant_id +
+                ", tpShopid=" + tpShopid +
                 ", mobile='" + mobile + '\'' +
                 ", totalMoney=" + totalMoney +
                 ", couponCode=" + couponCode +
-                ", mobile_suffix='" + mobile_suffix + '\'' +
+                ", mobileSuffix='" + mobileSuffix + '\'' +
                 ", status=" + status +
                 ", orderTime=" + orderTime +
                 ", tableName='" + tableName + '\'' +

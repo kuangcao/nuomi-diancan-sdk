@@ -12,6 +12,7 @@ public abstract class ServiceTest {
 
     @BeforeClass
     public static void BeforeClass() {
+
         diancanClient = DiancanClient.create(new DiancanConfigStorage() {
 
             @Override
@@ -43,6 +44,13 @@ public abstract class ServiceTest {
             public String getDishBaseUrl() {
                 return "http://61.135.186.174";
             }
+        });
+
+        diancanClient.setLogListener((cmd, isSuccess, request, response) -> {
+            System.out.println("cmd:" + cmd);
+            System.out.println("isSuccess:" + isSuccess);
+            System.out.println("request:\n" + request);
+            System.out.println("response:\n" + response);
         });
     }
 }

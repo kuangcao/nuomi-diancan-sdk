@@ -11,8 +11,13 @@ import java.util.List;
  */
 public class Dish implements Serializable {
 
+    public static final int ONLINE_STATE_SELL_OUT = 0;
+    public static final int ONLINE_STATE_ONLINE = 1;
+    public static final int ONLINE_STATE_OFFLINE = 2;
+    public static final int ONLINE_STATE_DELETED = 3;
+
     @JSONField(name = "shop_id")
-    private String tpMerchantId;
+    private String tpShopId;
     @JSONField(name = "dish_code")
     private String id;
     @JSONField(name = "dish_thumb_image")
@@ -140,12 +145,12 @@ public class Dish implements Serializable {
         this.dishAttrs = dishAttrs;
     }
 
-    public String getTpMerchantId() {
-        return tpMerchantId;
+    public String getTpShopId() {
+        return tpShopId;
     }
 
-    public void setTpMerchantId(String tpMerchantId) {
-        this.tpMerchantId = tpMerchantId;
+    public void setTpShopId(String tpShopId) {
+        this.tpShopId = tpShopId;
     }
 
     public int getIncreaseUnit() {
@@ -279,7 +284,7 @@ public class Dish implements Serializable {
     @Override
     public String toString() {
         return "Dish{" +
-                "tpMerchantId='" + tpMerchantId + '\'' +
+                "tpShopId='" + tpShopId + '\'' +
                 ", id='" + id + '\'' +
                 ", dishThumbImages=" + dishThumbImages +
                 ", dishImages=" + dishImages +

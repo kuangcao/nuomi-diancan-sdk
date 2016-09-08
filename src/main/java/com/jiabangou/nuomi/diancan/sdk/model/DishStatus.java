@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class DishStatus implements Serializable {
 
     @JSONField(name = "shop_id")
-    private String tpMerchantId;
+    private String tpShopId;
     @JSONField(name = "dish_code")
     private String id;
     @JSONField(name = "online_state")
@@ -33,18 +33,18 @@ public class DishStatus implements Serializable {
         this.onlineState = onlineState;
     }
 
-    public String getTpMerchantId() {
-        return tpMerchantId;
+    public String getTpShopId() {
+        return tpShopId;
     }
 
-    public void setTpMerchantId(String tpMerchantId) {
-        this.tpMerchantId = tpMerchantId;
+    public void setTpShopId(String tpShopId) {
+        this.tpShopId = tpShopId;
     }
 
     @Override
     public String toString() {
         return "DishStatus{" +
-                "tpMerchantId='" + tpMerchantId + '\'' +
+                "tpShopId='" + tpShopId + '\'' +
                 ", id='" + id + '\'' +
                 ", onlineState=" + onlineState +
                 '}';

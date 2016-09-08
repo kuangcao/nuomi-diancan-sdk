@@ -13,21 +13,21 @@ public interface FirstPayOrderService {
 
     /**
      * 根据商户id和取餐码
-     * @param tpMerchantId
+     * @param tpShopId
      * @param codeNum
      * @return 先付逻辑
      * @throws NuomiErrorException
      */
-    Order getByMchIdAndCodeNum(Long tpMerchantId, String codeNum) throws NuomiErrorException;
+    Order getByShopIdAndCodeNum(Long tpShopId, String codeNum) throws NuomiErrorException;
 
     /**
      * 根据商户id和手机号后四位
-     * @param tpMerchantId 商户id
+     * @param tpShopId 第三方店铺id
      * @param mobileSuffix 手机号后四位
      * @return
      * @throws NuomiErrorException
      */
-    Order getByMchIdAndMobileSuffix(Long tpMerchantId, String mobileSuffix) throws NuomiErrorException;
+    Order getByShopIdAndMobileSuffix(Long tpShopId, String mobileSuffix) throws NuomiErrorException;
 
     /**
      * 确认接单
@@ -47,11 +47,11 @@ public interface FirstPayOrderService {
 
     /**
      * 返回TP商户所有已支付未完成的订单，只返回昨天到现在的订单
-     * @param tpMerchantId
+     * @param tpShopId
      * @return
      * @throws NuomiErrorException
      */
-    List<Order> getUnfinishedOrders(Long tpMerchantId) throws NuomiErrorException;
+    List<Order> getUnfinishedOrders(Long tpShopId) throws NuomiErrorException;
 
 
 }

@@ -27,33 +27,34 @@ public class FirstPayOrderServiceImpl extends DiancanBaseServiceImpl implements 
     private static final String DIANCAIUI_UPDATEORDER = "/diancaiui/updateorder";
     private static final String DIANCAIUI_POIORDER = "/diancaiui/poiorder";
 
+
     public FirstPayOrderServiceImpl(OkHttpClient client, DiancanConfigStorage configStorage, LogListener logListener) {
         super(client, configStorage, logListener);
     }
 
     @Override
-    public Order getByMchIdAndCodeNum(Long tpMerchantId, String codeNum) throws NuomiErrorException {
-        return getByMchIdAndCodeNum(tpMerchantId, codeNum, PayType.PAY_FIRST);
+    public Order getByShopIdAndCodeNum(Long tpMerchantId, String codeNum) throws NuomiErrorException {
+        return getByShopIdAndCodeNum(tpMerchantId, codeNum, PayType.PAY_FIRST);
     }
 
     @Override
-    public Order getByMchIdAndMobileSuffix(Long tpMerchantId, String mobileSuffix) throws NuomiErrorException {
-        return getByMchIdAndMobileSuffix(tpMerchantId, mobileSuffix, PayType.PAY_FIRST);
+    public Order getByShopIdAndMobileSuffix(Long tpMerchantId, String mobileSuffix) throws NuomiErrorException {
+        return getByShopIdAndMobileSuffix(tpMerchantId, mobileSuffix, PayType.PAY_FIRST);
     }
 
 
-    protected Order getByMchIdAndCodeNum(Long tpMerchantId, String codeNum, int payType) throws NuomiErrorException {
+    protected Order getByShopIdAndCodeNum(Long tpShopId, String codeNum, int payType) throws NuomiErrorException {
         JSONObject jsonObject = execute(DIANCAIUI_QUERYORDER, new HashMap<String, String>() {{
-            put("tp_merchant_id", String.valueOf(tpMerchantId));
+            put("tp_merchant_id", String.valueOf(tpShopId));
             put("code_num", codeNum);
             put("pay_type", String.valueOf(payType));
         }});
         return jsonObject.getObject(DATA, Order.class);
     }
 
-    protected Order getByMchIdAndMobileSuffix(Long tpMerchantId, String mobileSuffix, int payType) throws NuomiErrorException {
+    protected Order getByShopIdAndMobileSuffix(Long tpShopId, String mobileSuffix, int payType) throws NuomiErrorException {
         JSONObject jsonObject = execute(DIANCAIUI_QUERYORDER, new HashMap<String, String>() {{
-            put("tp_merchant_id", String.valueOf(tpMerchantId));
+            put("tp_merchant_id", String.valueOf(tpShopId));
             put("menu_num", mobileSuffix);
             put("pay_type", String.valueOf(payType));
         }});
@@ -99,13 +100,13 @@ public class FirstPayOrderServiceImpl extends DiancanBaseServiceImpl implements 
     }
 
     @Override
-    public List<Order> getUnfinishedOrders(Long tpMerchantId) throws NuomiErrorException {
-        if (tpMerchantId == null) {
-            throw new NuomiErrorException(-1, "tpMerchantId is required.");
+    public List<Order> getUnfinishedOrders(Long tpShopId) throws NuomiErrorException {
+        if (tpShopId == null) {
+            throw new NuomiErrorException(-1, "tpShopId is required.");
         }
 
         JSONObject jsonObject = execute(DIANCAIUI_POIORDER, new HashMap<String, String>() {{
-            put("tp_merchant_id", String.valueOf(tpMerchantId));
+            put("tp_merchant_id", String.valueOf(tpShopId));
         }});
         JSONArray jsonArray = jsonObject.getJSONArray(DATA);
         return jsonArray.stream().map(json-> TypeUtils.castToJavaBean(json, Order.class)).collect(toList());

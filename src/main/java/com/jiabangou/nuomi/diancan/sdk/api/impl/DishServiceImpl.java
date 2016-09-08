@@ -12,9 +12,9 @@ import okhttp3.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * 菜品服务实现
@@ -121,6 +121,90 @@ public class DishServiceImpl implements DishService {
                 partDishStatuses = new ArrayList<>(10);
             }
         }
+    }
+
+    @Override
+    public void online(String tpShopId, List<String> tpDishIds) throws NuomiErrorException {
+        if (tpDishIds == null || tpDishIds.isEmpty()) {
+            return;
+        }
+        updateDishOnlineStatuses(tpDishIds.stream().map(dishId-> {
+            DishStatus dishStatus = new DishStatus();
+            dishStatus.setId(dishId);
+            dishStatus.setTpShopId(tpShopId);
+            dishStatus.setOnlineState(Dish.ONLINE_STATE_ONLINE);
+            return dishStatus;
+        }).collect(toList()));
+    }
+
+    @Override
+    public void online(String tpShopId, String tpDishId) throws NuomiErrorException {
+        online(tpShopId, new ArrayList<String>() {{
+            add(tpDishId);
+        }});
+    }
+
+    @Override
+    public void delete(String tpShopId, List<String> tpDishIds) throws NuomiErrorException {
+        if (tpDishIds == null || tpDishIds.isEmpty()) {
+            return;
+        }
+        updateDishOnlineStatuses(tpDishIds.stream().map(dishId-> {
+            DishStatus dishStatus = new DishStatus();
+            dishStatus.setId(dishId);
+            dishStatus.setTpShopId(tpShopId);
+            dishStatus.setOnlineState(Dish.ONLINE_STATE_DELETED);
+            return dishStatus;
+        }).collect(toList()));
+    }
+
+    @Override
+    public void delete(String tpShopId, String tpDishId) throws NuomiErrorException {
+        delete(tpShopId, new ArrayList<String>() {{
+            add(tpDishId);
+        }});
+    }
+
+    @Override
+    public void offline(String tpShopId, List<String> tpDishIds) throws NuomiErrorException {
+        if (tpDishIds == null || tpDishIds.isEmpty()) {
+            return;
+        }
+        updateDishOnlineStatuses(tpDishIds.stream().map(dishId-> {
+            DishStatus dishStatus = new DishStatus();
+            dishStatus.setId(dishId);
+            dishStatus.setTpShopId(tpShopId);
+            dishStatus.setOnlineState(Dish.ONLINE_STATE_OFFLINE);
+            return dishStatus;
+        }).collect(toList()));
+    }
+
+    @Override
+    public void offline(String tpShopId, String tpDishId) throws NuomiErrorException {
+        offline(tpShopId, new ArrayList<String>() {{
+            add(tpDishId);
+        }});
+    }
+
+    @Override
+    public void sellOut(String tpShopId, List<String> tpDishIds) throws NuomiErrorException {
+        if (tpDishIds == null || tpDishIds.isEmpty()) {
+            return;
+        }
+        updateDishOnlineStatuses(tpDishIds.stream().map(dishId-> {
+            DishStatus dishStatus = new DishStatus();
+            dishStatus.setId(dishId);
+            dishStatus.setTpShopId(tpShopId);
+            dishStatus.setOnlineState(Dish.ONLINE_STATE_SELL_OUT);
+            return dishStatus;
+        }).collect(toList()));
+    }
+
+    @Override
+    public void sellOut(String tpShopId, String tpDishId) throws NuomiErrorException {
+        sellOut(tpShopId, new ArrayList<String>() {{
+            add(tpDishId);
+        }});
     }
 
 }
