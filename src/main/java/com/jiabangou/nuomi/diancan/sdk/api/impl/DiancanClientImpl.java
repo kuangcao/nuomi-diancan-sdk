@@ -97,34 +97,33 @@ public class DiancanClientImpl implements DiancanClient {
             Order order = JSONObject.toJavaObject(jsonObject, Order.class);
 
             String tpOderId = pushConsumer.addOrder(order);
-            JSONObject data = new JSONObject();
-            data.put("order_status", order.getStatus());
-            data.put("tp_order_id", tpOderId);
-
             PushResponse pushResponse = PushResponse.create();
-            pushResponse.setData(data);
+            pushResponse.setData(new JSONObject() {{
+                put("order_status", order.getStatus());
+                put("tp_order_id", tpOderId);
+            }});
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
         } else if (pushAction == PushConsumer.PUSH_ACTION_CHANGE_ORDER_PAY_STATUS) {
             JSONObject jsonObject = (JSONObject)JSON.toJSON(params);
             OrderPayStatus orderPayStatus = JSONObject.toJavaObject(jsonObject, OrderPayStatus.class);
             String tpOderId = pushConsumer.changeOrderPayStatus(orderPayStatus);
-            JSONObject data = new JSONObject();
-            data.put("order_status", orderPayStatus.getStatus());
-            data.put("tp_order_id", tpOderId);
 
             PushResponse pushResponse = PushResponse.create();
-            pushResponse.setData(data);
+            pushResponse.setData(new JSONObject() {{
+                put("order_status", orderPayStatus.getStatus());
+                put("tp_order_id", tpOderId);
+            }});
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
 
         } else if (pushAction == PushConsumer.PUSH_ACTION_GET_ORDER_STATUS) {
             int status = pushConsumer.getOrderStatus(Long.valueOf(params.get("tp_order_id")));
             PushResponse pushResponse = PushResponse.create();
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("status", String.valueOf(status));
-            jsonObject.put("tp_order_id", params.get("tp_order_id"));
-            pushResponse.setData(jsonObject);
+            pushResponse.setData(new JSONObject() {{
+                put("status", String.valueOf(status));
+                put("tp_order_id", params.get("tp_order_id"));
+            }});
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
         }
