@@ -48,14 +48,14 @@ public class DiancanBaseServiceImpl {
      */
     protected Map<String, String> buildRealParams(Map<String, String> params) {
         Map<String, String> realParams = new HashMap<>(params.size()+2);
-        realParams.put("service", configStorage.getAppKey());
+        realParams.put("service", configStorage.getClientID());
         realParams.put("sequence", String.valueOf(System.currentTimeMillis() / 1000));
         realParams.putAll(params);
 
         List<String> sortStrings = realParams.keySet().stream()
                 .filter(key -> (!"intToken".equals(key)) && (!"log_id".equals(key)) && realParams.get(key) != null)
                 .sorted().map(key->key+":"+realParams.get(key)).collect(toList());
-        sortStrings.add(configStorage.getAppSecret());
+        sortStrings.add(configStorage.getClientSecret());
 
         realParams.put("token", DigestUtils.md5Hex(StringUtils.join(sortStrings, "_")));
         return realParams;
@@ -71,13 +71,13 @@ public class DiancanBaseServiceImpl {
         if (sign == null || StringUtils.isBlank(sign)) {
             return false;
         }
-        if (!configStorage.getAppKey().equals(params.get("service"))) {
+        if (!configStorage.getClientID().equals(params.get("service"))) {
             return false;
         }
         List<String> sortStrings = params.keySet().stream()
                 .filter(key -> (!"intToken".equals(key)) && (!"log_id".equals(key)) && (!"token".equals(key)))
                 .sorted().map(key->key+":"+params.get(key)).collect(toList());
-        sortStrings.add(configStorage.getAppSecret());
+        sortStrings.add(configStorage.getClientSecret());
         String buildSign = DigestUtils.md5Hex(StringUtils.join(sortStrings, "_"));
         return buildSign.equals(sign);
     }

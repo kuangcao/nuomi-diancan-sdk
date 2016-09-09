@@ -49,8 +49,8 @@ public class DishServiceImpl implements DishService {
      * @return 在请求参数基础上混入了签名和公用参数
      */
     protected JSONObject buildRealParams(JSONObject jsonObject) {
-        jsonObject.put("site_name", configStorage.getDishAppKey());
-        jsonObject.put("sign", configStorage.getDishAppSecret());
+        jsonObject.put("site_name", configStorage.getDishClientID());
+        jsonObject.put("sign", configStorage.getDishClientSecret());
         return jsonObject;
     }
 

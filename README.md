@@ -9,14 +9,14 @@
 
 | 百度糯米参数命名 | 当前SDK命名 |
 |--------|--------|
-| service | app_key |
-| token(用于生成签名的token) | app_secret |
+| service | clientId |
+| token(用于生成签名的token) | clientSecret |
 | token(生成的inttoken作为token摘要) | sign（其实就是签名） |
-| site_name(/dish/info上传菜品接口) | dish_app_key |
-| sign(/dish/info上传菜品接口) | dish_app_secret |
+| site_name(/dish/info上传菜品接口) | dishClientKey |
+| sign(/dish/info上传菜品接口) | dishClientSecret |
 | shop_id(/dish/info上传菜品接口) | tp_shop_id |
-| dish_code(/dish/info上传菜品接口) | tp_dish_id |
 | tp_merchant_id | tp_shop_id |
+| dish_code(/dish/info上传菜品接口) | tp_dish_id |
 
 ## 附属帮助
 

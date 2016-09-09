@@ -163,7 +163,7 @@ public class DiancanClientImpl implements DiancanClient {
         List<String> sortStrings = params.keySet().stream()
                 .filter(key -> (!"intToken".equals(key)) && (!"log_id".equals(key)) && (!"token".equals(key)))
                 .sorted().map(key->key+":"+params.get(key)).collect(toList());
-        sortStrings.add(configStorage.getAppSecret());
+        sortStrings.add(configStorage.getClientSecret());
         String buildSign = DigestUtils.md5Hex(StringUtils.join(sortStrings, "_"));
         return buildSign.equals(sign);
     }

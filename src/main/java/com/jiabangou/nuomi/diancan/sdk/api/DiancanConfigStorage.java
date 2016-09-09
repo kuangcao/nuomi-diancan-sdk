@@ -13,30 +13,34 @@ public interface DiancanConfigStorage {
      */
     String DISH_BASE_URL = "http://dish.nuomi.com";
 
-    String getAppKey();
+    String getClientID();
 
-    String getAppSecret();
+    String getClientSecret();
 
     /**
      * 等同于 site_name
      * @return
      */
-    String getDishAppKey();
+    String getDishClientID();
 
     /**
-     * 就是sign
+     * 对应百度参数里面的sign
      * @return
      */
-    String getDishAppSecret();
+    String getDishClientSecret();
 
     /**
-     *
+     * 获取调用的基础URL
      * @return
      */
     default String getBaseUrl() {
         return BASE_URL;
     }
 
+    /**
+     * 获取DishAPI的基础URL
+     * @return
+     */
     default String getDishBaseUrl() {
         return DISH_BASE_URL;
     }

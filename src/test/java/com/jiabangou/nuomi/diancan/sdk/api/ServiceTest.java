@@ -16,22 +16,22 @@ public abstract class ServiceTest {
         diancanClient = DiancanClient.create(new DiancanConfigStorage() {
 
             @Override
-            public String getAppKey() {
+            public String getClientID() {
                 return "xiaoyage";
             }
 
             @Override
-            public String getAppSecret() {
+            public String getClientSecret() {
                 return "cdd6d544297af47cf41a4ec403db3f24";
             }
 
             @Override
-            public String getDishAppKey() {
+            public String getDishClientID() {
                 return "xiaoyage";
             }
 
             @Override
-            public String getDishAppSecret() {
+            public String getDishClientSecret() {
                 return "a43db63a-4547-4855-8228-f060c1858618";
             }
 
