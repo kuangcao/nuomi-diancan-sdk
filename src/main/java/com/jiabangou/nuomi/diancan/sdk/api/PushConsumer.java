@@ -9,10 +9,6 @@ import com.jiabangou.nuomi.diancan.sdk.model.OrderPayStatus;
  */
 public interface PushConsumer {
 
-    int PUSH_ACTION_ADD_ORDER = 1;
-    int PUSH_ACTION_CHANGE_ORDER_PAY_STATUS = 2;
-    int PUSH_ACTION_GET_ORDER_STATUS = 3;
-
     /**
      * 创建订单接口
      * @param order

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.jiabangou.nuomi.diancan.sdk.api.*;
 import com.jiabangou.nuomi.diancan.sdk.model.Order;
 import com.jiabangou.nuomi.diancan.sdk.model.OrderPayStatus;
+import com.jiabangou.nuomi.diancan.sdk.model.PushAction;
 import com.jiabangou.nuomi.diancan.sdk.model.PushResponse;
 import okhttp3.OkHttpClient;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -82,15 +83,30 @@ public class DiancanClientImpl implements DiancanClient {
     }
 
     @Override
-    public PushResponse pushHandle(int pushAction, Map<String, String> params) {
+    public PushResponse pushHandle(PushAction pushAction, Map<String, String> params) {
         if (isValidSign(params)) {
             PushResponse pushResponse = new PushResponse();
             pushResponse.setErrno(3);
             pushResponse.setMsg("sign error");
+            pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
         }
-        if (pushAction == PushConsumer.PUSH_ACTION_ADD_ORDER) {
-            JSONObject jsonObject = (JSONObject)JSON.toJSON(params);
+        try {
+            return callPushHandle(pushAction, params);
+        } catch (Exception e) {
+            logging(pushAction.name(), false, params.toString(), e.getMessage());
+            PushResponse pushResponse = new PushResponse();
+            pushResponse.setErrno(10);
+            pushResponse.setMsg("system error");
+            pushResponse.setSequence(params.get("sequence"));
+            return pushResponse;
+        }
+    }
+
+    private PushResponse callPushHandle(PushAction pushAction, final Map<String, String> params) {
+
+        if (pushAction == PushAction.ADD_ORDER) {
+            JSONObject jsonObject = (JSONObject) JSON.toJSON(params);
             jsonObject.put("pay_detail", JSON.parseObject(jsonObject.getString("pay_detail")));
             jsonObject.put("dishes", JSON.parseArray(jsonObject.getString("dishes")));
 
@@ -104,7 +120,7 @@ public class DiancanClientImpl implements DiancanClient {
             }});
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
-        } else if (pushAction == PushConsumer.PUSH_ACTION_CHANGE_ORDER_PAY_STATUS) {
+        } else if (pushAction == PushAction.CHANGE_ORDER_PAY_STATUS) {
             JSONObject jsonObject = (JSONObject)JSON.toJSON(params);
             OrderPayStatus orderPayStatus = JSONObject.toJavaObject(jsonObject, OrderPayStatus.class);
             String tpOderId = pushConsumer.changeOrderPayStatus(orderPayStatus);
@@ -117,7 +133,7 @@ public class DiancanClientImpl implements DiancanClient {
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
 
-        } else if (pushAction == PushConsumer.PUSH_ACTION_GET_ORDER_STATUS) {
+        } else if (pushAction == PushAction.GET_ORDER_STATUS) {
             int status = pushConsumer.getOrderStatus(Long.valueOf(params.get("tp_order_id")));
             PushResponse pushResponse = PushResponse.create();
             pushResponse.setData(new JSONObject() {{
@@ -127,7 +143,10 @@ public class DiancanClientImpl implements DiancanClient {
             pushResponse.setSequence(params.get("sequence"));
             return pushResponse;
         }
-        return null;
+        PushResponse pushResponse = new PushResponse();
+        pushResponse.setErrno(0);
+        pushResponse.setMsg("success");
+        return pushResponse;
     }
 
 
