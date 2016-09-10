@@ -9,9 +9,9 @@
     <version>0.1.1-SNAPSHOT</version>
 
 
-    <name>nuomi diancan SDK</name>
+    <name>糯米点餐 SDK</name>
     <description>糯米点餐 SDK</description>
-    <url>https://github.com/kuangcao/eleme-sdk</url>
+    <url>https://github.com/kuangcao/nuomi-diancan-sdk</url>
 
     <licenses>
         <license>
