@@ -53,9 +53,10 @@ public class ShopServiceImpl extends DiancanBaseServiceImpl implements ShopServi
     public void syncTablesAndCategories(Long tpShopId, List<Table> tables, List<TableCategory> tableCategories)
         throws NuomiErrorException {
 
-        JSONObject jsonObject = new JSONObject();
-        jsonObject.put("tables", JSONObject.toJSON(tables));
-        jsonObject.put("categories", JSONObject.toJSON(tableCategories));
+        JSONObject jsonObject = new JSONObject() {{
+            put("tables", JSONObject.toJSON(tables));
+            put("categories", JSONObject.toJSON(tableCategories));
+        }};
         execute(DIANCAIUI_SYNCTABLEINFO, new HashMap<String, String>() {{
             put("tp_merchant_id", String.valueOf(tpShopId));
             put("menu_info", jsonObject.toJSONString());
